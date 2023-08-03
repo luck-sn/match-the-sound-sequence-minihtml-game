@@ -26,20 +26,17 @@ $(document).on("keydown",function(){
 $(".btn").on("click",function(event){
     if(game_status)
     {
-        $("#"+event.target.id).addClass("pressed")
         player_sound.push(event.target.id);
         playsound(event.target.id);
         compareSound(level_sound,player_sound);
+        $("#"+event.target.id).addClass("pressed")
         setTimeout(function(){$("#"+event.target.id).removeClass("pressed")},100);
     }
 });
 
-
-
 function compareSound(levelSound,playerinputSound)
 { 
     let compare_result=JSON.stringify(levelSound.slice(0,playerinputSound.length)) == JSON.stringify(playerinputSound)
-
     if(compare_result)
     {
         if(playerinputSound.length==levelSound.length)
@@ -49,9 +46,7 @@ function compareSound(levelSound,playerinputSound)
                 current_level++;
                 $("#level-title").text("Level "+current_level);
                 resetPlayerSound();
-            },800);
-               
-            
+            },800);        
         }
         return ;
     }
@@ -81,28 +76,8 @@ function randomSound()
 
 function playsound(key)
 {   
-    switch(key){
-        case 'blue':
-            let bAudio=new Audio('sounds/blue.mp3');
-            bAudio.play();
-            break;
-        case 'green':
-            let gaudio=new Audio('sounds/green.mp3');
-            gaudio.play();
-            break;
-        case 'red':
-            let raudio=new Audio('sounds/red.mp3');
-            raudio.play();
-            break;
-        case 'wrong':
-            let waudio=new Audio('sounds/wrong.mp3');
-            waudio.play();
-            break;
-        case 'yellow':
-            let yaudio=new Audio('sounds/yellow.mp3');
-            yaudio.play();
-            break;
-    }
+    let audio=new Audio("sounds/"+key+".mp3");
+    audio.play();
 }
 
 
